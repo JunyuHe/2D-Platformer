@@ -6,6 +6,8 @@ extends CharacterBody2D
 @export var gravity : float = 500
 @export var jump_force : float = 200
 
+
+
 var move_input : float
 
 @onready var sprite : Sprite2D = $Sprite

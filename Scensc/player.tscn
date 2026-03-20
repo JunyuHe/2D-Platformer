@@ -38,6 +38,21 @@ tracks/0/keys = {
 "values": [ExtResource("1_ubecq")]
 }
 
+[sub_resource type="Animation" id="Animation_xdua5"]
+resource_name = "jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_xdua5")]
+}
+
 [sub_resource type="Animation" id="Animation_axri1"]
 resource_name = "move"
 length = 0.25
@@ -54,21 +69,6 @@ tracks/0/keys = {
 "values": [ExtResource("3_xdua5"), ExtResource("1_ubecq")]
 }
 
-[sub_resource type="Animation" id="Animation_xdua5"]
-resource_name = "jump"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_xdua5")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ct468"]
 _data = {
 &"RESET": SubResource("Animation_f7i8e"),
@@ -77,7 +77,7 @@ _data = {
 &"move": SubResource("Animation_axri1")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_belmq")
 
 [node name="Sprite" type="Sprite2D" parent="."]
