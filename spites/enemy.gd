@@ -6,6 +6,9 @@ extends Area2D
 @onready var start_pos : Vector2 = global_position
 @onready var target_pos : Vector2 = global_position + move_direction
 
+func _ready ():
+	$AnimationPlayer.play("fly")
+	
 func _physics_process(delta):
 	global_position = global_position.move_toward(target_pos, move_speed * delta)
 	

@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=3 uid="uid://nlkkusc1sfoh"]
+
+[ext_resource type="Texture2D" uid="uid://cw8ve08co5tms" path="res://Sprites/Characters/character_0024.png" id="1_u7iua"]
+[ext_resource type="Texture2D" uid="uid://7j5f58v817vc" path="res://Sprites/Characters/character_0025.png" id="2_46i5j"]
+[ext_resource type="Texture2D" uid="uid://ccpqftl2qj5by" path="res://Sprites/Characters/character_0026.png" id="3_560tq"]
+
+[sub_resource type="GDScript" id="GDScript_3xjeq"]
+script/source = "extends Area2D
+
+@export var move_direction : Vector2
+@export var move_speed : float = 20
+
+@onready var start_pos : Vector2 = global_position
+@onready var target_pos : Vector2 = global_position + move_direction
+
+func _ready ():
+	$AnimationPlayer.play(\"fly\")
+	
+func _physics_process(delta):
+	global_position = global_position.move_toward(target_pos, move_speed * delta)
+	
+	if global_position == target_pos:
+		if target_pos == start_pos:
+			target_pos = start_pos + move_direction
+		else:
+			target_pos = start_pos
+
+func _on_body_entered(body):
+	if not body.is_in_group(\"Player\"):
+		return
+		
+	body.take_damage(1)
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mpnel"]
+
+[sub_resource type="Animation" id="Animation_rluq2"]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_u7iua")]
+}
+
+[sub_resource type="Animation" id="Animation_g8pgl"]
+resource_name = "fly"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_u7iua"), ExtResource("2_46i5j"), ExtResource("3_560tq")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cyv8y"]
+_data = {
+&"RESET": SubResource("Animation_rluq2"),
+&"fly": SubResource("Animation_g8pgl")
+}
+
+[node name="Enemy" type="Area2D"]
+script = SubResource("GDScript_3xjeq")
+move_direction = Vector2(0, 20)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_u7iua")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mpnel")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cyv8y")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

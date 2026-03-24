@@ -15,6 +15,10 @@ run/main_scene="uid://2symkqacd1mm"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+PlayerStats="*res://spites/player_stats.gd"
+
 [input]
 
 move_left={
