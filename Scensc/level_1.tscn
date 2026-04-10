@@ -1,16 +1,48 @@
-[gd_scene load_steps=7 format=3 uid="uid://2symkqacd1mm"]
+[gd_scene load_steps=9 format=3 uid="uid://2symkqacd1mm"]
 
+[ext_resource type="Script" uid="uid://c270jjp4hqqan" path="res://spites/background_parallax.gd" id="1_apsc7"]
 [ext_resource type="Texture2D" uid="uid://daddmg1hkc27d" path="res://Sprites/Backgrounds/backgroundForest.png" id="1_b654t"]
 [ext_resource type="TileSet" uid="uid://bphy4st8ym4ie" path="res://Sprites/Tiles/new_tile_set.tres" id="2_dqhpv"]
 [ext_resource type="PackedScene" uid="uid://ch6jt8xc4np84" path="res://Scensc/player.tscn" id="3_dqhpv"]
 [ext_resource type="PackedScene" uid="uid://nlkkusc1sfoh" path="res://Scensc/enemy.tscn" id="4_3xjeq"]
 [ext_resource type="PackedScene" uid="uid://b03tb6jxwat3f" path="res://Scensc/coin.tscn" id="5_mpnel"]
 [ext_resource type="PackedScene" uid="uid://c3jjhbppbeen5" path="res://Scensc/end_flag.tscn" id="6_xkqho"]
+[ext_resource type="PackedScene" uid="uid://xek3gjhp1lb6" path="res://Scensc/level_2.tscn" id="8_82c3t"]
 
 [node name="Main" type="Node2D"]
+modulate = Color(0.87, 1, 0.90466666, 1)
 
-[node name="BackgroundSprite" type="Sprite2D" parent="."]
-position = Vector2(317, -144)
+[node name="Background" type="Node2D" parent="."]
+script = ExtResource("1_apsc7")
+
+[node name="BackgroundSprite" type="Sprite2D" parent="Background"]
+modulate = Color(0.87, 1, 0.90466666, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_b654t")
+
+[node name="BackgroundSprite2" type="Sprite2D" parent="Background"]
+modulate = Color(0.87, 1, 0.90466666, 1)
+position = Vector2(512, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_b654t")
+
+[node name="BackgroundSprite3" type="Sprite2D" parent="Background"]
+modulate = Color(0.87, 1, 0.90466666, 1)
+position = Vector2(1024, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_b654t")
+
+[node name="BackgroundSprite4" type="Sprite2D" parent="Background"]
+modulate = Color(0.87, 1, 0.90466666, 1)
+position = Vector2(-901, 148)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_b654t")
+offset = Vector2(778, -296)
+
+[node name="BackgroundSprite5" type="Sprite2D" parent="Background"]
+modulate = Color(0.87, 1, 0.90466666, 1)
+position = Vector2(-1024, 0)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_b654t")
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -65,4 +97,4 @@ position = Vector2(473, -55)
 
 [node name="EndFlag" parent="." instance=ExtResource("6_xkqho")]
 position = Vector2(612, -74)
-scene_to_load = ExtResource("3_dqhpv")
+scene_to_load = ExtResource("8_82c3t")
